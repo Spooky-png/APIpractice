@@ -8,36 +8,18 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
 
   constructor(private _http: HttpClient) {
-    this.getTasks();
+    this.getPokemon();
+    this.abilityCheck();
   }
-  getTasks(){
-    // our http response is an Observable, store it in a variable
-    let tempObservable = this._http.get('/tasks');
-    // subscribe to the Observable and provide the code we would like to do with our data from the response
-    tempObservable.subscribe(data => console.log("Got our tasks!", data));
+  getPokemon(){
+    let zapdos = this._http.get('https://pokeapi.co/api/v2/pokemon/145/');
+    zapdos.subscribe(data => console.log(`${data.name}'s abilities are ${data.abilities[0].ability.name} and ${data.abilities[1].ability.name}.`))
   }
-  newTask(){
-    // our http response is an Observable, store it in a variable
-    let tempObservable = this._http.get('/new');
-    // subscribe to the Observable and provide the code we would like to do with our data from the response
-    tempObservable.subscribe(data => console.log("Got our tasks!", data));
-  }
-  deleteTask(){
-    // our http response is an Observable, store it in a variable
-    let tempObservable = this._http.get('/delete/:id');
-    // subscribe to the Observable and provide the code we would like to do with our data from the response
-    tempObservable.subscribe(data => console.log("Got our tasks!", data));
-  }
-  viewTask(){
-    // our http response is an Observable, store it in a variable
-    let tempObservable = this._http.get('/:id');
-    // subscribe to the Observable and provide the code we would like to do with our data from the response
-    tempObservable.subscribe(data => console.log("Got our tasks!", data));
-  }
-  updateTask(){
-    // our http response is an Observable, store it in a variable
-    let tempObservable = this._http.get('/:id');
-    // subscribe to the Observable and provide the code we would like to do with our data from the response
-    tempObservable.subscribe(data => console.log("Got our tasks!", data));
+  abilityCheck(){
+    let check = this._http.get('https://pokeapi.co/api/v2/ability/46/');
+    check.subscribe(data => console.log(`${data.pokemon.length} Pokemon have the ability Pressure.`))
+    let check2 = this._http.get('https://pokeapi.co/api/v2/ability/9/');
+    check2.subscribe(data2 => console.log(`${data2.pokemon.length} Pokemon have the ability Static.`))
+    // coincidentally happen to both be 28
   }
 }
