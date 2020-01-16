@@ -2,6 +2,9 @@ var express = require('express');
     app = express();
     mongoose = require('mongoose');
 
+    app.use(express.static( __dirname + '/public/dist/public' ));
+
+
 const TaskSchema = new mongoose.Schema({
     title: String,
     description: String,
@@ -13,9 +16,8 @@ const TaskSchema = new mongoose.Schema({
 
 mongoose.connect('mongodb://localhost/task_db', { useNewUrlParser: true })
 
-app.set('view engine', 'ejs');
 app.use(express.json());
-app.get('/',(req, res) =>{
+app.get('/tasks',(req, res) =>{
     Task.find()
         .then(tasks => res.json(tasks))
         .catch(err => res.json(err));
