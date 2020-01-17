@@ -1,5 +1,28 @@
-<h1>Restful Tasks API</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tasks</title>
+</head>
+<body>
+  <div class = "bigborder">
+  <div class = "header">
+  <h1>Restful Tasks API</h1>
+  <p>Total Tasks: {{tasks.length}}</p>
+</div>
+  <div class = "buttontime">
+  <button (click)="onButtonClickParam(tasks)">Show All Tasks!</button>
+</div>
+<div class="alltasks">
 <h2>All the Tasks:</h2>
-<h3 *ngFor="let task of tasks">{{task.title}} - {{task.description}}</h3>
-<p>Total Tasks: {{tasks.length}}</p>
+<h3 *ngFor ="let container of containers">{{container.title}}<button (click)="onButtonClickParams([container])">Show Details!</button></h3>
+</div>
+<div class="taskinfo">
+<h3 *ngFor ="let detail of details">{{detail.title}} - {{detail.description}}</h3>
 <p *ngIf="tasks.length < 4">You need at least 4 things to do bro. Do more stuff.</p>
+</div>
+</div>
+</body>
+</html>

@@ -8,6 +8,8 @@ import { HttpService } from './http.service';
 })
 export class AppComponent implements OnInit {
   tasks: any = [];
+  containers: any = [];
+  details: any = [];
   constructor(private _httpService: HttpService){}
   ngOnInit(){
     this.getTasksFromService();
@@ -20,4 +22,15 @@ export class AppComponent implements OnInit {
        this.tasks = data;
       });
   }
+  onButtonClickParam(num: any) { 
+    console.log(`Click event is working with num param: ${num[0].title}`);
+    this.containers = num
+    let observable = this._httpService.postToServer({data: num});
+    observable.subscribe(data => console.log("Got our data!", data));
+}
+onButtonClickParams(detail: any) { 
+  this.details = detail
+  let observable = this._httpService.postToServer({data: detail});
+  observable.subscribe(data => console.log("Got our data!", data));
+}
 }

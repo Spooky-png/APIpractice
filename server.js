@@ -22,6 +22,11 @@ app.get('/tasks',(req, res) =>{
         .then(tasks => res.json(tasks))
         .catch(err => res.json(err));
 }),
+app.post('/tasks',(req, res) =>{
+    Task.find()
+        .then(tasks => res.json(tasks))
+        .catch(err => res.json(err));
+}),
 app.delete('/remove/:id', (req, res) =>{
     const task = Task.findOne({_id: req.params.id})
         task.remove({_id: req.params.id})
