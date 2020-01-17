@@ -4,25 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tasks</title>
+  <title>Task Manager</title>
 </head>
 <body>
   <div class = "bigborder">
-  <div class = "header">
-  <h1>Restful Tasks API</h1>
-  <p>Total Tasks: {{tasks.length}}</p>
+  <div class = "header"><h1>Task Manager</h1></div>
+  <div class = "taskinfo">
+  <div *ngFor="let task of tasks">
+    <h1>Task List</h1>
+    <h2>Title: {{ task.title }}</h2>
+    <p>Description: {{ task.description }}</p>
+    <button id="delete"(click)="deleteTask(task._id)">Delete</button>
+    <button id="edit"(click)="taskForm(task)">Edit</button>
+  </div>
+  <div class = "editfield">
+  <form *ngIf="editTask" (submit)="updateTask()">
+    <h3>Edit Task</h3>
+    <p class="error" *ngIf="editerrors.title">{{editerrors.title.message}}</p>
+    <input type="text" name="editTask.title" [(ngModel)]="editTask.title" />
+    <p class="error" *ngIf="editerrors.description">{{editerrors.description.message}}</p>
+    <input type="text" name="editTask.description" [(ngModel)]="editTask.description" />
+    <input id="edit"type="submit" value="Update Task"/>
+  </form>
 </div>
+  </div>
+  <br><br>
   <div class = "buttontime">
-  <button (click)="onButtonClickParam(tasks)">Show All Tasks!</button>
+  <form (submit)="createTask()">
+    <p class="error" *ngIf="errors.title">{{errors.title.message}}</p>
+    <label>New Task Title:</label>
+    <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+    <br><br>
+    <p class="error" *ngIf="errors.description">{{errors.description.message}}</p>
+    <label>New Task Description:</label>
+    <input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+    <br><br>
+    <input id="create" type="submit" value="Create Task" />
+  </form>
 </div>
-<div class="alltasks">
-<h2>All the Tasks:</h2>
-<h3 *ngFor ="let container of containers">{{container.title}}<button (click)="onButtonClickParams([container])">Show Details!</button></h3>
-</div>
-<div class="taskinfo">
-<h3 *ngFor ="let detail of details">{{detail.title}} - {{detail.description}}</h3>
-<p *ngIf="tasks.length < 4">You need at least 4 things to do bro. Do more stuff.</p>
-</div>
+  <br><br>
 </div>
 </body>
 </html>

@@ -46,7 +46,7 @@ app.get('/:id', (req,res) =>{
         .then(tasks => res.json(tasks))
         .catch(err => res.json(err));
 });
-app.put('/:id', (req,res) =>{
+app.put('/tasks/:id', (req,res) =>{
     Task.findOne({_id: req.params.id})
         .then(tasks =>{
             tasks.title = req.body.title;
