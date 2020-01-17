@@ -8,18 +8,14 @@ import { HttpClient } from '@angular/common/http';
 export class HttpService {
 
   constructor(private _http: HttpClient) {
-    this.getPokemon();
-    this.abilityCheck();
+    //this.getPokemon();
+    //this.abilityCheck();
   }
-  getPokemon(){
-    let zapdos = this._http.get('https://pokeapi.co/api/v2/pokemon/145/');
-    zapdos.subscribe(data => console.log(`${data.name}'s abilities are ${data.abilities[0].ability.name} and ${data.abilities[1].ability.name}.`))
-  }
-  abilityCheck(){
-    let check = this._http.get('https://pokeapi.co/api/v2/ability/46/');
-    check.subscribe(data => console.log(`${data.pokemon.length} Pokemon have the ability Pressure.`))
-    let check2 = this._http.get('https://pokeapi.co/api/v2/ability/9/');
-    check2.subscribe(data2 => console.log(`${data2.pokemon.length} Pokemon have the ability Static.`))
-    // coincidentally happen to both be 28
-  }
+  getTasks(){
+    // Remove the lines of code where we make the variable 'tempObservable' and subscribe to it.
+    // tempObservable = this._http.get('/tasks');
+    // tempObservable.subscribe(data => console.log("Got our tasks!", data));
+    // Return the observable to wherever the getTasks method was invoked.
+    return this._http.get('/tasks');
+}
 }
