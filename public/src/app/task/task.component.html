@@ -1,0 +1,11 @@
+<form (submit)="createTask()">
+    <p class="error" *ngIf="errors.title">{{errors.title.message}}</p>
+    <label>New Task Title:</label>
+    <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+    <br><br>
+    <p class="error" *ngIf="errors.description">{{errors.description.message}}</p>
+    <label>New Task Description:</label>
+    <input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+    <br><br>
+    <input id="create" type="submit" value="Create Task" />
+  </form>
